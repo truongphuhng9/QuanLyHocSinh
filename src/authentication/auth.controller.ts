@@ -1,5 +1,6 @@
-import { Controller, Post, Body, HttpCode, UseGuards, Req } from "@nestjs/common";
+import { Controller, Post, Body, HttpCode, UseGuards, Req, Res } from "@nestjs/common";
 import { AuthService } from "./auth.service";
+import { Response } from "express";
 
 import { RegisterDto } from "./dto/register.dto";
 import { LocalAuthGuard } from "./localAuth.guard";
@@ -20,9 +21,11 @@ export class AuthController {
   @HttpCode(200)
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Req() request: RequestWithUser) {
-     const user = request.user;
+  async login(@Req() request: RequestWithUser, @Res() response: Response) {
+     const { user } = request;
+     const cookie = this.authService.getCookieWithJwtToken(user.id);
+     response.setHeader('Set-Cookie', cookie);
      user.password = undefined;
-     return user;
+     return response.send(user);
   }
 }
