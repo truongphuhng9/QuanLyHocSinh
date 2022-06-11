@@ -3,7 +3,7 @@ import { UsersService } from '../users/users.service';
 import RegisterDto from './dto/register.dto';
 import bcrypt from 'bcrypt';
 
-export class AuthenticationService {
+export class AuthService {
   constructor(
     private readonly usersService: UsersService
   ) {}

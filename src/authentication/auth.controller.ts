@@ -1,23 +1,24 @@
 import { Controller, Post, Body, HttpCode, UseGuards, Req } from "@nestjs/common";
-import { AuthenticationService } from "./authentication.service";
+import { AuthService } from "./auth.service";
 
 import { RegisterDto } from "./dto/register.dto";
-import {}
+import { LocalAuthGuard } from "./localAuth.guard";
+import RequestWithUser from "./request-with-user.interface";
 
 
-@Controller('authentication')
-export class AuthenticationController {
+@Controller('auth')
+export class AuthController {
   constructor(
-    private readonly authenticationService: AuthenticationService
+    private readonly authService: AuthService
   ) {}
 
   @Post('register')
   async register(@Body() registrationData: RegisterDto) {
-    return this.authenticationService.register(registrationData);
+    return this.authService.register(registrationData);
   }
 
   @HttpCode(200)
-  @UseGuards(LocalSAuthenticationGuard)
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Req() request: RequestWithUser) {
      const user = request.user;
