@@ -19,7 +19,7 @@ export class UsersService {
     throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
   }
 
-  async createUser(user: CreateUserDto): Promise<User> {
+  async create(user: CreateUserDto): Promise<User> {
     const newUser = await this.usersRepository.create(user);
     await this.usersRepository.save(newUser);
     return newUser;
