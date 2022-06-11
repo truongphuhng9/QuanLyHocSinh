@@ -1,7 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import StudentsService from './students.service';
 import CreateStudentDto from './dto/create-student.dto';
 import UpdateStudentDto from './dto/update-student.dto';
+import { ListAllStudents } from './dto/list-all-student.dto';
 
 @Controller('students')
 export default class StudentsController {
@@ -10,7 +11,7 @@ export default class StudentsController {
   ) {}
 
   @Get()
-  getAllStudents() {
+  findAll(@Query() query: ListAllStudents) {
     return this.studentsService.getAllStudents();
   }
 
