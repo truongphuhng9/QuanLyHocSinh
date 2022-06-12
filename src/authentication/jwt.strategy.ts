@@ -5,6 +5,7 @@ import { Request } from "express";
 import { Strategy } from "passport-local";
 
 import { UsersService } from "src/users/users.service";
+import { UnauthorizedException } from "@nestjs/common";
 
 export class JwtStrategy extends PassportStrategy(Strategy) {
     constructor(
@@ -17,5 +18,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             }]),
             secretOrKey: configService.get('JWT_SECRET')
         })
+    }
+
+    async validate(payload: TokenPayload) {
+        const user = await this.userService.getById(payload.userId);
+        if (!user) {
+            throw new UnauthorizedException();
+        }
+        return user;
     }
 }
