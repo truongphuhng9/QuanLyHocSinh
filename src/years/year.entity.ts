@@ -16,3 +16,5 @@ export class Year {
   @OneToMany(() => Classroom, (classroom: Classroom) => classroom.schoolYear)
   public openedClassrooms: Classroom[];
 }
+
+export default Year;

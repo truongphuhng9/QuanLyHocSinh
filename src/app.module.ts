@@ -5,6 +5,7 @@ import * as Joi from '@hapi/joi'
 import { DatabaseModule } from './database/database.module';
 import { AuthenModule } from './authentication/auth.module';
 import { UsersModule } from './users/users.module';
+import { ClassroomsModule } from './classrooms/classrooms.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { UsersModule } from './users/users.module';
     DatabaseModule,
     AuthenModule,
     UsersModule,
+    ClassroomsModule
   ],
   controllers: [],
   providers: [],

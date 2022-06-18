@@ -1,7 +1,7 @@
-import { Year } from "src/school-years/year.entity";
+import { Year } from "src/years/year.entity";
 import Student from "src/students/student.entity";
 import { Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Class } from "./class.entity";
+import { Class } from "../classes/class.entity";
 
 @Entity()
 export class Classroom {

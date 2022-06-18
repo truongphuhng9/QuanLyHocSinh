@@ -12,3 +12,5 @@ export class Term {
   @ManyToOne(() => Year, (year: Year) => year.terms)
   public schoolYear: Year;
 }
+
+export default Term;

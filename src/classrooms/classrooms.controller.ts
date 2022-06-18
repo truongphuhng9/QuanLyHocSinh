@@ -1,4 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
+import ClassroomsService from "./classrooms.service";
 
 @Controller('classrooms')
 export default class ClassroomsController {
@@ -8,6 +9,6 @@ export default class ClassroomsController {
 
   @Get()
   findAll() {
-    return this.
+    return this.classroomsService.findAll();
   }
 }
