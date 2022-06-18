@@ -19,7 +19,7 @@ export class UsersService {
     throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
   }
 
-  async getById(id: string): Promise<User> {
+  async getById(id: number): Promise<User> {
     const user = this.usersRepository.findOne({ where: { id } });
     if (user) {
       return user;

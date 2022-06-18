@@ -28,7 +28,7 @@ export class AuthService {
     }
   }
 
-  public async getAuthenticatedUser(email: string, hashedPassword: string) {
+  public async validateUser(email: string, hashedPassword: string) {
     try {
       const user = await this.usersService.getByEmail(email);
       await this.verifyPassword(hashedPassword, user.password);
@@ -44,5 +44,15 @@ export class AuthService {
     if (!isPasswordMatch) {
       throw new HttpException('Invalid credentials!', HttpStatus.UNAUTHORIZED);
     }
+  }
+
+  public getCookieWithJwtToken(userId: number) {
+    const payload: TokenPayload = { userId };
+    const token = this.jwtService.sign(payload);
+    return `Authentication=${token}; HttpOnly; Path=/; Max-Age=${this.configService.get('JWT_EXPIRATION_TIME')}`;
+  }
+
+  public getCookieForLogOut() {
+    return `Authentication=; HttpOnly; Path=/; Max-Age=0`;
   }
 }
