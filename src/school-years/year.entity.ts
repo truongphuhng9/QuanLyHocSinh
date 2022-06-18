@@ -1,3 +1,4 @@
+import Classroom from "src/classrooms/classroom.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Term } from "./term.entity";
 
@@ -11,4 +12,7 @@ export class Year {
 
   @OneToMany(() => Term, (term: Term) => term.schoolYear)
   public terms: Term[];
+
+  @OneToMany(() => Classroom, (classroom: Classroom) => classroom.schoolYear)
+  public openedClassrooms: Classroom[];
 }
