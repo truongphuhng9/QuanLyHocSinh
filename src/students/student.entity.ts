@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import Classroom from 'src/classrooms/classroom.entity';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Student {
@@ -25,6 +26,9 @@ class Student {
     
     @Column()
     public sex: string;
+
+    @ManyToMany(() => Classroom, (classroom: Classroom) => classroom.students)
+    public enrolledClassrooms: Classroom[];
 }
 
 

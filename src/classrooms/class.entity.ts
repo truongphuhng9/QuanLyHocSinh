@@ -9,6 +9,7 @@ export class Class {
     @Column()
     public class_code: string;
 
+
     @OneToMany(() => Classroom, (classroom: Classroom) => classroom.className)
     public allClassrooms: Classroom[];
 
