@@ -3,6 +3,8 @@ import { StudentsModule } from './students/students.module';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from '@hapi/joi'
 import { DatabaseModule } from './database/database.module';
+import { AuthenModule } from './authentication/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -20,7 +22,8 @@ import { DatabaseModule } from './database/database.module';
       })
     }),
     DatabaseModule,
-
+    AuthenModule,
+    UsersModule,
   ],
   controllers: [],
   providers: [],

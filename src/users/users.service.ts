@@ -14,7 +14,7 @@ export class UsersService {
   async getByEmail(email: string): Promise<User> {
     const user = await this.usersRepository.findOne({ where: { email } });
     if (user) {
-
+      return user;
     }
     throw new HttpException('User not found!', HttpStatus.NOT_FOUND);
   }

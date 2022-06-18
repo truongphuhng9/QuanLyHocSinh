@@ -19,7 +19,7 @@ import { JwtStrategy } from "./jwt.strategy";
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => ({
-        secret: configService.get('JWT_SCRET'),
+        secret: `${configService.get('JWT_SCRET')}`,
         signOptions: {
           expiresIn: `${configService.get('JWT_EXPIRATION_TIME')}s`,
         },
@@ -30,4 +30,4 @@ import { JwtStrategy } from "./jwt.strategy";
   controllers: [AuthController],
 })
 
-export class AuthenticationModule {};
+export class AuthenModule {};

@@ -2,11 +2,12 @@ import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
 import { ExtractJwt } from "passport-jwt";
 import { Request } from "express";
-import { Strategy } from "passport-local";
+import { Strategy } from "passport-jwt";
 
 import { UsersService } from "src/users/users.service";
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -18,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
             jwtFromRequest: ExtractJwt.fromExtractors([(request: Request) => {
                 return request?.cookies?.Authentication;
             }]),
-            secretOrKey: configService.get('JWT_SECRET')
+            secretOrKey: configService.get('JWT_SECRET'),
         })
     }
 

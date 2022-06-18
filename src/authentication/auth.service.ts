@@ -1,10 +1,12 @@
-import { HttpException, HttpStatus } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import RegisterDto from './dto/register.dto';
-import bcrypt from 'bcrypt';
+import * as  bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import PostgresErrorCode from '../database/postgresErrorCodes.enum';
 
+@Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
@@ -35,14 +37,14 @@ export class AuthService {
       user.password = undefined;
       return user;
     } catch (error) {
-      throw new HttpException('Invalid credentials!', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Invalid email!', HttpStatus.UNAUTHORIZED);
     }
   }
 
   private async verifyPassword(password: string, hashedPassword: string) {
     const isPasswordMatch = await bcrypt.compare(password, hashedPassword);
     if (!isPasswordMatch) {
-      throw new HttpException('Invalid credentials!', HttpStatus.UNAUTHORIZED);
+      throw new HttpException('Invalid password!', HttpStatus.UNAUTHORIZED);
     }
   }
 

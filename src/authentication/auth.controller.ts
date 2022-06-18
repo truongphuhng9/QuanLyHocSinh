@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, UseGuards, Req, Res, Get } from "@nes
 import { AuthService } from "./auth.service";
 import { response, Response } from "express";
 
-import { RegisterDto } from "./dto/register.dto";
+import RegisterDto from "./dto/register.dto";
 import { LocalAuthGuard } from "./localAuth.guard";
 import RequestWithUser from "./request-with-user.interface";
 import JwtAuthGuard from "./jwt-authentication.guard";
@@ -34,13 +34,14 @@ export class AuthController {
      const { user } = request;
      const cookie = this.authService.getCookieWithJwtToken(user.id);
      response.setHeader('Set-Cookie', cookie);
+     console.log(cookie);
      user.password = undefined;
      return response.send(user);
   }
 
   @UseGuards(JwtAuthGuard)
-  @Post('log-out')
-  async logOut(@Req() request: RequestWithUser, @Res() response: Response) {
+  @Post('logout')
+  async logOut(@Res() response: Response) {
     response.setHeader('Set-Cookie', this.authService.getCookieForLogOut());
     return response.sendStatus(200);
   }
