@@ -1,6 +1,6 @@
 import Classroom from "src/classrooms/classroom.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Term } from "./term.entity";
+import { Term } from "../terms/term.entity";
 
 @Entity()
 export class Year {

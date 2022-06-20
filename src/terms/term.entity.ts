@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Year } from "./year.entity";
+import { Year } from "../years/year.entity";
 
 @Entity()
 export class Term {
@@ -7,7 +7,7 @@ export class Term {
   public id?: number;
 
   @Column()
-  public term_number: number;
+  public termNumber: number;
 
   @ManyToOne(() => Year, (year: Year) => year.terms)
   public schoolYear: Year;
