@@ -3,12 +3,12 @@ import Student from "src/students/student.entity";
 import Year from "src/years/year.entity";
 
 export class UpdateClassroomControllerDto {
-  class_id: number;
-  year_id: number;
+  className: string;
+  yearId: number;
 }
 
 export class UpdateClassroomServiceDto {
-  className: Class;
+  className: string;
   schoolYear: Year;
   students: Student[];
 }

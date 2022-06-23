@@ -9,6 +9,7 @@ import { ClassroomsModule } from './classrooms/classrooms.module';
 import { TermsModule } from './terms/terms.module';
 import { YearsModule } from './years/years.module';
 import { ClassesModule } from './classes/classes.module';
+import { CoursesModule } from './courses/courses.module';
 
 @Module({
   imports: [
@@ -28,10 +29,8 @@ import { ClassesModule } from './classes/classes.module';
     AuthenModule,
     UsersModule,
     ClassroomsModule,
-    ClassesModule,
-    YearsModule,
-    TermsModule,
     StudentsModule,
+    CoursesModule
   ],
   controllers: [],
   providers: [],

@@ -1,15 +1,14 @@
 import { Class } from "src/classes/class.entity";
 import Student from "src/students/student.entity";
-import Year from "src/years/year.entity";
 
 export class CreateClassroomServiceDto {
-  className: Class;
-  schoolYear: Year;
+  className: string;
+  schoolYear: number;
   students: Student[];
 }
 
 export class CreateClassroomContronllerDto { 
-  classId: string;
-  yearId: string;
+  className: string;
+  schoolYear: number;
   studentIds: string[];
 }

@@ -1,6 +1,6 @@
 import { Year } from "src/years/year.entity";
 import Student from "src/students/student.entity";
-import { Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Class } from "../classes/class.entity";
 
 @Entity()
@@ -8,11 +8,11 @@ export class Classroom {
   @PrimaryGeneratedColumn()
   public id?: number;
 
-  @ManyToOne(() => Class, (className: Class) => className.allClassrooms)
-  public className: Class;
+  @Column()
+  public className: string;
 
-  @ManyToOne(() => Year, (schoolYear: Year) => schoolYear.openedClassrooms)
-  public schoolYear: Year;
+  @Column()
+  public schoolYear: number;
 
   //many2many: Student - One student can study in different classroom
   @ManyToMany(() => Student, (student: Student) => student.enrolledClassrooms)

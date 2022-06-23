@@ -12,7 +12,6 @@ import ClassroomsService from "./classrooms.service";
     TypeOrmModule.forFeature([Classroom]),
     forwardRef(() => YearsModule),
     forwardRef(() => StudentsModule),
-    ClassesModule
   ],
   controllers: [ClassroomsController],
   providers: [ClassroomsService],

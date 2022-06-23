@@ -17,7 +17,7 @@ export default class ClassroomsService {
   }
 
   async getClassroomById(id: number) {
-    const classroom = await this.classroomsRepository.findOne(id, { relations: ['students', 'schoolYear'] });
+    const classroom = await this.classroomsRepository.findOne(id, { relations: ['students'] });
     if (classroom) {
       return classroom;
     }
@@ -25,7 +25,7 @@ export default class ClassroomsService {
   }
 
   async getClassroomsByIds(ids: number[]) {
-    return await this.classroomsRepository.findByIds(ids, { relations: ['students', 'schoolYear']});
+    return await this.classroomsRepository.findByIds(ids, { relations: ['students']});
   }
 
   async createClassroom(classroom: CreateClassroomServiceDto) {

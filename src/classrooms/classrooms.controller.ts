@@ -14,7 +14,6 @@ import { UpdateClassroomControllerDto } from "./dto/update-classroom.dto";
 export default class ClassroomsController {
   constructor(
     private readonly classroomsService: ClassroomsService,
-    private readonly classesService: ClassesService,
     @Inject(forwardRef(() => YearsService))
     private readonly yearsService: YearsService,
     @Inject(forwardRef(() => StudentsService))
@@ -34,11 +33,9 @@ export default class ClassroomsController {
   @Post()
   async createClassroom(@Body() { yearId, classId, studentIds }: CreateClassroomContronllerDto) {
     const year = await this.yearsService.findYearById(Number(yearId));
-    const className = await this.classesService.findClassById(Number(classId));
     const students = await this.studentsService.getStudentsByIds(studentIds.map(id => Number(id)));
     const newClassroom = await this.classroomsService.createClassroom({
       schoolYear: year,
-      className: className,
       students: students
     });
     return newClassroom;
