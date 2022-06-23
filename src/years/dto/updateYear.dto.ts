@@ -3,7 +3,10 @@ import { IsArray, IsNumber, IsNumberString, ValidateNested } from "class-validat
 import Classroom from "src/classrooms/classroom.entity"
 import Term from "src/terms/term.entity"
 
-export class CreateYearServiceDto {
+export class UpdateYearServiceDto {
+  @IsNumber()
+  id: number
+
   @IsNumber()
   year: number
 
@@ -18,7 +21,7 @@ export class CreateYearServiceDto {
   openedClasses: Classroom[]
 }
 
-export class CreateYearControllerDto {
+export class UpdateYearControllerDto {
   @IsNumberString()
   year: string
 

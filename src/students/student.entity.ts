@@ -7,7 +7,7 @@ class Student {
     public id: number;
 
     @Column()
-    student_code: string;
+    public student_code: string;
 
     @Column() 
     public first_name: string;

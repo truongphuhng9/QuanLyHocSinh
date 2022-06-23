@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
+import { Body, Controller, Delete, forwardRef, Get, Inject, Param, Patch, Post } from "@nestjs/common";
 import FindOneParams from "src/utils/findOneParams";
-import YearService from "src/years/years.service";
+import YearsService from "src/years/years.service";
 import { CreateTermControllerDto } from "./dto/createTerm.dto";
 import { UpdateTermControllerDto } from "./dto/updateTerm.dto";
 import TermsService from "./terms.service";
@@ -9,7 +9,8 @@ import TermsService from "./terms.service";
 export default class TermsController {
   constructor(
     private readonly termsService: TermsService,
-    private readonly yearsService: YearService
+    @Inject(forwardRef(() => YearsService))
+    private readonly yearsService: YearsService
   ) {}
 
   @Get()
@@ -26,7 +27,7 @@ export default class TermsController {
   async createTerm(@Body() { termNumber, yearId }: CreateTermControllerDto) {
     const year = await this.yearsService.findYearById(Number(yearId));
     return this.termsService.createTerm({
-      termNumber: termNumber,
+      termNumber: Number(termNumber),
       schoolYear: year
     });
   }

@@ -1,5 +1,5 @@
 import { Type } from "class-transformer"
-import { IsNumber, IsString, ValidateNested } from "class-validator"
+import { IsNumber, IsNumberString, IsString, ValidateNested } from "class-validator"
 import Year from "src/years/year.entity"
 
 export class CreateTermServiceDto {
@@ -14,9 +14,9 @@ export class CreateTermServiceDto {
 
 export class CreateTermControllerDto {
   
-  @IsNumber()
-  termNumber: number
+  @IsNumberString()
+  termNumber: string
 
   @IsString()
-  yearId: Year
+  yearId: string
 }

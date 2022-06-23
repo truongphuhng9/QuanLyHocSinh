@@ -4,7 +4,7 @@ import { Repository } from "typeorm";
 import Year from "./year.entity";
 
 @Injectable() 
-export default class YearService {
+export default class YearsService {
   constructor(
     @InjectRepository(Year)
     private readonly yearsRepository: Repository<Year>

@@ -7,7 +7,7 @@ export class Class {
     public id?: number;
 
     @Column()
-    public class_code: string;
+    public classCode: string;
 
 
     @OneToMany(() => Classroom, (classroom: Classroom) => classroom.className)

@@ -13,11 +13,15 @@ export default class TermsService {
   ) {}
 
   findAllTerm() {
-    return this.termsRepository.find({ relations: ['year']});
+    return this.termsRepository.find({ relations: ['schoolYear']});
   }
 
   findTermById(id: number) {
     return this.termsRepository.findOne(id);
+  }
+
+  findTermByIds(ids: number[]) {
+    return this.termsRepository.findByIds(ids);
   }
 
   async createTerm(term: CreateTermServiceDto) {

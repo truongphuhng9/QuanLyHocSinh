@@ -1,7 +1,7 @@
 import { HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import CreateStudentDto from './dto/create-student.dto';
+import { CreateStudentServiceDto } from './dto/create-student.dto';
 import UpdateStudentDto from './dto/update-student.dto';
 import Student from './student.entity';
 
@@ -20,11 +20,16 @@ export default class StudentsService {
   }
 
   async getStudentById(id: number): Promise<Student> {
-    const student = await this.studentsRepository.findOne(id);
+    const student = await this.studentsRepository.findOne(id, { relations: ['enrolledClassrooms']});
     if (student) {
       return student;
     }
     throw new HttpException(`Student not found!`, HttpStatus.NOT_FOUND);
+  }
+
+  async getStudentsByIds(ids: number[]) {
+    const students = await this.studentsRepository.findByIds(ids);
+    return students;
   }
 
   async updateStudent(id: number, updateStudent: UpdateStudentDto): Promise<Student> {
@@ -36,7 +41,7 @@ export default class StudentsService {
     throw new HttpException('Student not found!', HttpStatus.NOT_FOUND);
   }
 
-  async createStudent(student: CreateStudentDto): Promise<Student> {
+  async createStudent(student: CreateStudentServiceDto): Promise<Student> {
     const newStudent = await this.studentsRepository.create(student);
     await this.studentsRepository.save(newStudent);
     return newStudent;

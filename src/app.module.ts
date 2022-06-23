@@ -7,10 +7,11 @@ import { AuthenModule } from './authentication/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClassroomsModule } from './classrooms/classrooms.module';
 import { TermsModule } from './terms/terms.module';
+import { YearsModule } from './years/years.module';
+import { ClassesModule } from './classes/classes.module';
 
 @Module({
   imports: [
-    StudentsModule, 
     ConfigModule.forRoot({
       validationSchema: Joi.object({
         POSTGRES_HOST: Joi.string().required(),
@@ -27,7 +28,10 @@ import { TermsModule } from './terms/terms.module';
     AuthenModule,
     UsersModule,
     ClassroomsModule,
-    TermsModule
+    ClassesModule,
+    YearsModule,
+    TermsModule,
+    StudentsModule,
   ],
   controllers: [],
   providers: [],
