@@ -1,15 +1,18 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, forwardRef, Get, Inject, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import StudentsService from './students.service';
 import { CreateStudentServiceDto } from './dto/create-student.dto';
-import UpdateStudentDto from './dto/update-student.dto';
+import { UpdateStudentControllerDto } from './dto/update-student.dto';
 import { ListAllStudents } from './dto/list-all-student.dto';
 import JwtAuthGuard from 'src/authentication/jwt-authentication.guard';
 import Classroom from 'src/classrooms/classroom.entity';
+import ClassroomsService from 'src/classrooms/classrooms.service';
 
 @Controller('students')
 export default class StudentsController {
   constructor(
-    private readonly studentsService: StudentsService
+    private readonly studentsService: StudentsService,
+    @Inject(forwardRef(() => ClassroomsService))
+    private readonly classroomsService: ClassroomsService
   ) {}
 
   @Get()
@@ -64,8 +67,12 @@ export default class StudentsController {
 
   @Put(':id')
   //@UseGuards(JwtAuthGuard)
-  async updateStudent(@Param('id') id: string, @Body() student: UpdateStudentDto) {
-    return this.studentsService.updateStudent(Number(id), student);
+  async updateStudent(@Param('id') id: number, @Body() student: UpdateStudentControllerDto) {
+    const enrolledClassrooms = await this.classroomsService.getClassroomsByIds(student.enrolledClassroomIds)
+    return this.studentsService.updateStudent(id, {
+      ...student,
+      enrolledClassrooms: enrolledClassrooms
+    });
   }
 
   @Delete(':id')

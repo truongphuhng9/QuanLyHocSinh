@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 import { Classroom } from "./classroom.entity";
 import { CreateClassroomServiceDto } from "./dto/create-classroom.dto";
+import { UpdateClassroomServiceDto } from "./dto/update-classroom.dto";
 import ClassroomNotFoundException from "./exceptions/classroom-notfound.exception";
 
 @Injectable()
@@ -37,7 +38,7 @@ export default class ClassroomsService {
     return newClassroom;
   }
 
-  async updateClassroom(id: number, classroom: CreateClassroomServiceDto) { 
+  async updateClassroom(id: number, classroom: UpdateClassroomServiceDto) { 
     await this.classroomsRepository.update(id, classroom);
     const updatedClassroom = await this.classroomsRepository.findOne(id);
     if (updatedClassroom) { 

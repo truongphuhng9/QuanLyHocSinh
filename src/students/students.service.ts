@@ -2,7 +2,7 @@ import { HttpException, HttpStatus, Injectable} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateStudentServiceDto } from './dto/create-student.dto';
-import UpdateStudentDto from './dto/update-student.dto';
+import { UpdateStudentServiceDto } from './dto/update-student.dto';
 import Student from './student.entity';
 
 @Injectable()
@@ -32,7 +32,7 @@ export default class StudentsService {
     return students;
   }
 
-  async updateStudent(id: number, updateStudent: UpdateStudentDto): Promise<Student> {
+  async updateStudent(id: number, updateStudent: UpdateStudentServiceDto): Promise<Student> {
     await this.studentsRepository.update(id, updateStudent);
     const updatedStudent = this.studentsRepository.findOne(id);
     if (updatedStudent) {

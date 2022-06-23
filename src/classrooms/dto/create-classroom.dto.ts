@@ -10,5 +10,5 @@ export class CreateClassroomServiceDto {
 export class CreateClassroomContronllerDto { 
   className: string;
   schoolYear: number;
-  studentIds: string[];
+  studentIds: number[];
 }

@@ -31,19 +31,22 @@ export default class ClassroomsController {
   } 
 
   @Post()
-  async createClassroom(@Body() { yearId, classId, studentIds }: CreateClassroomContronllerDto) {
-    const year = await this.yearsService.findYearById(Number(yearId));
-    const students = await this.studentsService.getStudentsByIds(studentIds.map(id => Number(id)));
+  async createClassroom(@Body() classroom: CreateClassroomContronllerDto) {
+    const students = await this.studentsService.getStudentsByIds(classroom.studentIds);
     const newClassroom = await this.classroomsService.createClassroom({
-      schoolYear: year,
+      ...classroom,
       students: students
     });
     return newClassroom;
   }
 
   @Patch()
-  async updateClassroom(@Param() id: number, @Body() {}: UpdateClassroomControllerDto) {
-    const 
+  async updateClassroom(@Param() id: number, @Body() classroom: UpdateClassroomControllerDto) {
+    const students = await this.studentsService.getStudentsByIds(classroom.studentIds);
+    await this.classroomsService.updateClassroom(id, {
+      ...classroom,
+      students: students
+    });
   }
 
 }
