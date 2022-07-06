@@ -4,7 +4,6 @@ import { CreateStudentServiceDto } from './dto/create-student.dto';
 import { UpdateStudentControllerDto } from './dto/update-student.dto';
 import { ListAllStudents } from './dto/list-all-student.dto';
 import JwtAuthGuard from 'src/authentication/jwt-authentication.guard';
-import Classroom from 'src/classrooms/classroom.entity';
 import ClassroomsService from 'src/classrooms/classrooms.service';
 
 @Controller('students')
@@ -18,39 +17,6 @@ export default class StudentsController {
   @Get()
   findAll(@Query() query: ListAllStudents) {
     return this.studentsService.getAllStudents();
-  }
-
-  @Get('init-data')
-  async createDemoStudents() {
-    const students = [
-      {
-        student_code: "12001",
-        first_name: "John",
-        last_name: "Cena",
-        email: "johncena@gmail.com",
-        address: "47 Dt.St, New York City",
-        date_of_birth: new Date(1995, 11, 17),
-        sex: "Nam",
-        enrolledClassrooms: [] as Classroom[],
-      },
-      {
-        student_code: "12002",
-        first_name: "John",
-        last_name: "Cena",
-        email: "johncena@gmail.com",
-        address: "47 Dt.St, New York City",
-        date_of_birth: new Date(1995, 11, 17),
-        sex: "Nam",
-        enrolledClassrooms: [] as Classroom[],
-      }
-    ]
-    if (process.env.DEBUG_MODE) {
-      const promises = await students.map(async student => {
-        await this.createStudent(student);
-      })
-      await Promise.all(promises);
-      return students
-    }
   }
 
   @Get(':id')
@@ -80,6 +46,4 @@ export default class StudentsController {
   async deleteStudent(@Param('id') id: string) {
     return this.studentsService.deleteStudent(Number(id));
   }
-
-  
 }

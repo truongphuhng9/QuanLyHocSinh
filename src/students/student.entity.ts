@@ -1,5 +1,7 @@
-import Classroom from 'src/classrooms/classroom.entity';
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
+import Classroom from '../classrooms/classroom.entity';
+import Course from '../courses/course.entity';
+import GradeRecord from '../grade-records/gradeRecord.entity';
+import { Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 class Student {
@@ -29,6 +31,11 @@ class Student {
 
     @ManyToMany(() => Classroom, (classroom: Classroom) => classroom.students)
     public enrolledClassrooms: Classroom[];
+
+    @ManyToMany(() => Course, (course: Course) => course.students) 
+    public enrolledCourses: Course[];
+
+    public gradeRecords: GradeRecord[];
 }
 
 

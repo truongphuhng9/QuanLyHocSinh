@@ -14,8 +14,6 @@ import { UpdateClassroomControllerDto } from "./dto/update-classroom.dto";
 export default class ClassroomsController {
   constructor(
     private readonly classroomsService: ClassroomsService,
-    @Inject(forwardRef(() => YearsService))
-    private readonly yearsService: YearsService,
     @Inject(forwardRef(() => StudentsService))
     private readonly studentsService: StudentsService
   ) {}

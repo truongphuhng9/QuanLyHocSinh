@@ -1,7 +1,6 @@
-import { Year } from "src/years/year.entity";
-import Student from "src/students/student.entity";
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Class } from "../classes/class.entity";
+import Student from "../students/student.entity";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import GradeRecord from "../grade-records/gradeRecord.entity";
 
 @Entity()
 export class Classroom {
@@ -18,6 +17,9 @@ export class Classroom {
   @ManyToMany(() => Student, (student: Student) => student.enrolledClassrooms)
   @JoinTable()
   public students: Student[];
+
+  @OneToMany(() => GradeRecord, (record: GradeRecord) => record.classroom)
+  public gradeRecords: GradeRecord[];
 }
 
 export default Classroom;

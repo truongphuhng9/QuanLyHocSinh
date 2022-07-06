@@ -6,10 +6,8 @@ import { DatabaseModule } from './database/database.module';
 import { AuthenModule } from './authentication/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClassroomsModule } from './classrooms/classrooms.module';
-import { TermsModule } from './terms/terms.module';
-import { YearsModule } from './years/years.module';
-import { ClassesModule } from './classes/classes.module';
 import { CoursesModule } from './courses/courses.module';
+import GradeRecordsModule from './grade-records/gradeRecords.module';
 
 @Module({
   imports: [
@@ -30,7 +28,8 @@ import { CoursesModule } from './courses/courses.module';
     UsersModule,
     ClassroomsModule,
     StudentsModule,
-    CoursesModule
+    CoursesModule,
+    GradeRecordsModule
   ],
   controllers: [],
   providers: [],

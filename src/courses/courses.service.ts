@@ -15,7 +15,7 @@ export default class CoursesService {
     return this.coursesRepository.find();
   }
 
-  findCourseById(id: number) {
+  getCourseById(id: number) {
     return this.coursesRepository.findOne(id);
   }
 

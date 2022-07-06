@@ -16,7 +16,7 @@ export default class CoursesController {
 
   @Get(':id')
   findCourseById(@Param() { id }: FindOneParams) {
-    return this.coursesService.findCourseById(Number(id));
+    return this.coursesService.getCourseById(Number(id));
   }
 
   @Post()
